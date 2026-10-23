@@ -1,0 +1,117 @@
+@import 'base/ui-variables';
+
+// iOS Glass Dark — palette iOS (mode sombre)
+@ios-accent:            #0A84FF;
+@ios-red:               #FF453A;
+@ios-green:             #30D158;
+@ios-orange:            #FF9F0A;
+
+@ios-bg-grouped:        #000000;
+@ios-bg-elevated:       #1C1C1E;
+@ios-bg-elevated-soft:  #161618;
+@ios-bg-tertiary:       #2C2C2E;
+
+@ios-label:             #FFFFFF;
+@ios-label-2:           rgba(235, 235, 245, 0.60);
+@ios-label-3:           rgba(235, 235, 245, 0.30);
+
+@ios-separator:         rgba(84, 84, 88, 0.65);
+@ios-separator-soft:    rgba(84, 84, 88, 0.35);
+@ios-fill:              rgba(118, 118, 128, 0.24);
+@ios-fill-strong:       rgba(118, 118, 128, 0.36);
+@ios-selected-bg:       rgba(10, 132, 255, 0.22);
+@ios-row-hover:         rgba(255, 255, 255, 0.06);
+@ios-toolbar-bg:        rgba(255, 255, 255, 0.04);
+
+@ios-glass-bg:          rgba(40, 40, 44, 0.60);
+@ios-glass-bg-strong:   rgba(18, 18, 20, 0.80);
+@ios-glass-border:      rgba(255, 255, 255, 0.12);
+@ios-glass-highlight:   rgba(255, 255, 255, 0.14);
+@ios-glass-shadow:      0 10px 40px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.40);
+@ios-card-shadow:       0 1px 2px rgba(0, 0, 0, 0.30), 0 4px 16px rgba(0, 0, 0, 0.25);
+
+// ---------- Panneaux (barre latérale | liste | lecture) ----------
+@ios-panel-sidebar:     #242424;
+@ios-panel:             #1B1B1B;
+@ios-panel-separator:   #313131;
+@ios-card:              #242424;
+@ios-card-soft:         #202020;
+
+// ---------- Étiquettes (teinte reprise de la couleur inline de Mailspring) ----------
+@ios-tag-bg:            ~"hsl(from currentColor h 30% 22%)";
+@ios-tag-text:          ~"hsl(from currentColor h 65% 80%)";
+
+// ---------- Rayons ----------
+@ios-radius-xl: 28px;
+@ios-radius-lg: 22px;
+@ios-radius-md: 14px;
+@ios-radius-sm: 10px;
+
+// ---------- Variables Mailspring ----------
+@font-family-sans-serif: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+@font-family: @font-family-sans-serif;
+@font-size-base: 13px;
+
+@accent-primary:            @ios-accent;
+@accent-primary-dark:       darken(@ios-accent, 8%);
+@component-active-color:    @ios-accent;
+@component-active-bg:       @ios-accent;
+
+@text-color:                @ios-label;
+@text-color-subtle:         @ios-label-2;
+@text-color-very-subtle:    @ios-label-3;
+@text-color-heading:        @ios-label;
+@text-color-highlight:      @ios-label;
+@text-color-selected:       #FFFFFF;
+@text-color-inverse:        #FFFFFF;
+@text-color-link:           @ios-accent;
+@text-color-link-hover:     lighten(@ios-accent, 8%);
+@text-color-error:          @ios-red;
+@text-color-success:        @ios-green;
+@text-color-warning:        @ios-orange;
+
+@background-primary:        @ios-bg-elevated;
+@background-off-primary:    @ios-bg-grouped;
+@background-secondary:      @ios-bg-grouped;
+@background-tertiary:       @ios-bg-tertiary;
+@panel-background-color:    @ios-bg-grouped;
+@toolbar-background-color:  @ios-bg-grouped;
+
+@border-color-primary:      @ios-separator;
+@border-color-secondary:    @ios-separator;
+@border-color-tertiary:     @ios-separator-soft;
+@border-color-divider:      @ios-separator;
+
+@source-list-bg:            @ios-bg-grouped;
+@source-list-active-bg:     @ios-fill-strong;
+@source-list-active-color:  @ios-label;
+
+@list-bg:                   @ios-bg-elevated;
+@list-border:               @ios-separator-soft;
+@list-hover-bg:             @ios-fill;
+@list-selected-bg:          @ios-selected-bg;
+@list-selected-color:       @ios-label;
+@list-focused-bg:           @ios-accent;
+@list-focused-color:        #FFFFFF;
+@list-focused-border:       @ios-accent;
+
+@input-bg:                  @ios-fill;
+@input-border-color:        transparent;
+@input-border-color-focus:  @ios-accent;
+
+@btn-default-bg-color:      @ios-fill;
+@btn-default-text-color:    @ios-label;
+@btn-emphasis-bg-color:     @ios-accent;
+@btn-emphasis-text-color:   #FFFFFF;
+
+@dropdown-default-bg-color: @ios-glass-bg;
+@dropdown-default-text-color: @ios-label;
+
+@border-radius-base:        @ios-radius-sm;
+@border-radius-large:       @ios-radius-md;
+@border-radius-small:       8px;
+
+@color-error:   @ios-red;
+@color-success: @ios-green;
+@color-warning: @ios-orange;
+@color-info:    @ios-accent;

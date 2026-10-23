@@ -1,0 +1,60 @@
+// iOS Glass Dark — styles injectés dans le cadre (iframe) de chaque email
+// Attention : le compilateur Less de Mailspring est ancien. Pas de drapeau « i »
+// dans les sélecteurs d'attribut, pas de :is().
+@import "ui-variables";
+
+.ignore-in-parent-frame {
+  // Certains emails (iPhone, newsletters) déclarent `color-scheme: dark`.
+  // Si le schéma de l'iframe diffère de celui de l'app, Chromium peint
+  // un fond noir opaque derrière le texte : on aligne les deux.
+  html {
+    color-scheme: light !important;
+  }
+  html,
+  body {
+    background-color: transparent !important;
+  }
+}
+
+// Noir pur dans un email : rendu transparent.
+// CSS ne sait pas lire la couleur calculée d'un élément, on cible donc
+// les écritures courantes du noir (style en ligne et attribut bgcolor).
+.ignore-in-parent-frame {
+  [style*="background-color: rgb(0, 0, 0)"],
+  [style*="background-color:rgb(0,0,0)"],
+  [style*="background-color: rgb(0,0,0)"],
+  [style*="background-color: rgba(0, 0, 0, 1)"],
+  [style*="background-color:rgba(0,0,0,1)"],
+  [style*="background-color: #000000"],
+  [style*="background-color:#000000"],
+  [style*="background-color: #000;"],
+  [style*="background-color:#000;"],
+  [style*="background-color: black"],
+  [style*="background-color:black"],
+  [style*="background: rgb(0, 0, 0)"],
+  [style*="background:rgb(0,0,0)"],
+  [style*="background: #000000"],
+  [style*="background:#000000"],
+  [style*="background: #000;"],
+  [style*="background:#000;"],
+  [style*="background: black"],
+  [style*="background:black"],
+  [bgcolor="#000000"],
+  [bgcolor="#000"],
+  [bgcolor="black"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+}
+
+// Mode de rendu « sombre » de Mailspring : il peint l'email en blanc puis
+// inverse toutes les couleurs (filter: invert), ce qui donne un bloc noir.
+// Mailspring ajoute aussi .has-background (fond blanc) à des emails sans aucun fond.
+// Sans fond blanc, seul le texte est inversé (noir -> blanc) sur la carte du thème.
+.ignore-in-parent-frame {
+  #inbox-html-wrapper,
+  #inbox-html-wrapper.has-background {
+    background: transparent !important;
+  }
+}

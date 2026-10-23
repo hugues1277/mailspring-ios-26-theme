@@ -1,0 +1,1089 @@
+// iOS Glass — thème Mailspring inspiré d'iOS 26 (Liquid Glass)
+@import "ui-variables";
+
+// ---------- Mixins ----------
+.ios-glass() {
+  background: @ios-glass-bg;
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid @ios-glass-border;
+  box-shadow: @ios-glass-shadow, inset 0 1px 0 @ios-glass-highlight;
+}
+.ios-capsule() {
+  border-radius: 999px;
+}
+
+// ---------- Base ----------
+body, .sheet-container, .sheet {
+  font-family: @font-family-sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  color: @ios-label;
+}
+.sheet, .sheet-container {
+  background: @ios-bg-grouped;
+}
+
+::selection {
+  background: fade(@ios-accent, 30%);
+}
+
+// Focus façon iOS
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px fade(@ios-accent, 40%);
+}
+
+// ---------- Barres de défilement fines ----------
+::-webkit-scrollbar { width: 10px; height: 10px; background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: @ios-label-3;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background-color: @ios-label-2; }
+::-webkit-scrollbar-corner { background: transparent; }
+.scrollbar-track { background: transparent !important; border: none !important; }
+.scrollbar-track .scrollbar-handle {
+  background: @ios-label-3 !important;
+  border-radius: 10px !important;
+  border: none !important;
+}
+
+// ---------- Barre d'outils ----------
+.sheet-toolbar,
+.sheet-toolbar-container {
+  background: @ios-glass-bg-strong !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+// ---------- Boutons : capsules ----------
+.btn,
+.btn-toolbar,
+.btn.btn-toolbar {
+  .ios-capsule();
+  background: @ios-fill;
+  color: @ios-label;
+  border: none;
+  box-shadow: none;
+  font-weight: 500;
+  transition: background 120ms ease, transform 120ms ease;
+  img, .content-mask { background-color: @ios-label-2; }
+
+  &:hover { background: @ios-fill-strong; }
+  &:active { transform: scale(0.97); }
+}
+.btn.btn-emphasis,
+.btn-primary,
+.btn.btn-confirm {
+  .ios-capsule();
+  background: @ios-accent;
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px fade(@ios-accent, 35%);
+  &:hover { background: lighten(@ios-accent, 4%); }
+}
+.btn.btn-danger {
+  background: fade(@ios-red, 14%);
+  color: @ios-red;
+}
+
+// ---------- Barre latérale (comptes, dossiers) ----------
+.account-sidebar,
+.column-RootSidebar,
+.outline-view {
+  background: @ios-bg-grouped !important;
+  border-right: none !important;
+}
+.outline-view {
+  .heading {
+    color: @ios-label;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    padding-top: 14px;
+  }
+  .item {
+    border-radius: @ios-radius-sm;
+    margin: 1px 8px;
+    color: @ios-label;
+    .name { font-weight: 500; }
+    .item-count-box {
+      background: transparent !important;
+      color: @ios-label-2 !important;
+      box-shadow: none !important;
+      font-weight: 500;
+    }
+    img.content-mask { background-color: @ios-accent !important; }
+    &:hover { background: @ios-fill; }
+    &.selected {
+      background: @ios-fill-strong !important;
+      color: @ios-label !important;
+      .name { font-weight: 600; }
+    }
+  }
+}
+
+// ---------- Recherche : capsule ----------
+.search-bar,
+.thread-search-bar,
+.search-bar .menu .header-container,
+input[type="search"] {
+  .ios-capsule();
+  background: @ios-fill !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: @ios-label;
+}
+
+// ---------- Champs ----------
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  background: @ios-fill;
+  border: 1px solid transparent;
+  border-radius: @ios-radius-sm;
+  color: @ios-label;
+  &:focus {
+    background: @ios-bg-elevated;
+    border-color: @ios-accent;
+    box-shadow: 0 0 0 3px fade(@ios-accent, 25%);
+  }
+}
+
+// ---------- Liste des conversations ----------
+.column-ThreadList,
+.thread-list,
+.list-container,
+.list-tabular {
+  background: @ios-bg-elevated !important;
+}
+.column-ThreadList {
+  border-radius: @ios-radius-lg @ios-radius-lg 0 0;
+}
+.list-tabular-item {
+  background: transparent;
+  border-bottom: 1px solid @ios-separator-soft !important;
+  color: @ios-label;
+  transition: background 100ms ease;
+
+  &:hover {
+    background: @ios-fill;
+    clip-path: inset(2px 8px round @ios-radius-md);
+  }
+  &.selected {
+    background: @ios-selected-bg !important;
+    clip-path: inset(2px 8px round @ios-radius-md);
+  }
+  &.focused,
+  &.keyboard-cursor {
+    background: @ios-accent !important;
+    color: #fff !important;
+    clip-path: inset(2px 8px round @ios-radius-md);
+    * { color: #fff !important; }
+    img.content-mask { background-color: #fff !important; }
+  }
+  &.unread:not(.focused) .participants,
+  &.unread:not(.focused) .subject {
+    font-weight: 600;
+    color: @ios-label;
+  }
+  .snippet, .timestamp, .thread-injected-timestamp {
+    color: @ios-label-2;
+  }
+}
+
+// ---------- Étiquettes : pastilles ----------
+.mail-label {
+  .ios-capsule();
+  padding: 1px 8px;
+  font-weight: 500;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+// ---------- Lecture des messages ----------
+.column-MessageList,
+.message-list,
+#message-list {
+  background: @ios-bg-grouped !important;
+}
+.message-subject-wrap {
+  .message-subject {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: @ios-label;
+  }
+}
+.message-item-wrap {
+  .message-item-white-wrap {
+    background: @ios-bg-elevated !important;
+    border-radius: @ios-radius-lg !important;
+    border: none !important;
+    box-shadow: @ios-card-shadow !important;
+    overflow: hidden;
+  }
+  &.collapsed .message-item-white-wrap {
+    background: @ios-bg-elevated-soft !important;
+  }
+  margin-bottom: 12px;
+}
+.message-participants .participant-name,
+.message-participants .from-contact {
+  color: @ios-label;
+  font-weight: 600;
+}
+.message-time,
+.message-participants .participant-label {
+  color: @ios-label-2;
+}
+
+// ---------- Composition ----------
+.composer-outer-wrap,
+.composer-inner-wrap {
+  background: @ios-bg-elevated !important;
+  border-radius: @ios-radius-lg;
+  box-shadow: @ios-card-shadow;
+}
+.composer-inner-wrap .composer-header-actions .action {
+  color: @ios-accent;
+}
+.tokenizing-text-field .token {
+  .ios-capsule();
+  background: @ios-fill;
+  color: @ios-label;
+  border: none;
+  &.selected, &.dragging {
+    background: @ios-accent;
+    color: #fff;
+  }
+}
+
+// ---------- Surfaces flottantes : vrai effet verre ----------
+.menu,
+.fixed-popover,
+.popover,
+.nylas-dropdown .secondary-items,
+.button-dropdown .secondary-items,
+.dropdown-menu,
+.toast,
+.notification {
+  .ios-glass();
+  border-radius: @ios-radius-md !important;
+  color: @ios-label;
+  overflow: hidden;
+}
+.menu .item {
+  border-radius: 8px;
+  margin: 2px 6px;
+  &.selected, &:hover {
+    background: @ios-accent !important;
+    color: #fff !important;
+  }
+}
+.fixed-popover .fixed-popover-pointer,
+.fixed-popover .fixed-popover-pointer.shadow {
+  display: none;
+}
+
+// ---------- Modales ----------
+.modal-container,
+.modal {
+  .ios-glass();
+  border-radius: @ios-radius-xl !important;
+}
+.modal-background,
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.25) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+// ---------- Préférences ----------
+.preferences-wrap,
+.preferences-content {
+  background: @ios-bg-grouped !important;
+}
+.preferences-tabs {
+  background: @ios-bg-grouped !important;
+  border-right: none !important;
+  .item {
+    border-radius: @ios-radius-sm;
+    margin: 2px 8px;
+    &.active {
+      background: @ios-fill-strong !important;
+      color: @ios-label !important;
+    }
+  }
+}
+.preferences-content .container-appearance,
+.preferences-content section,
+.preferences-content .container {
+  background: @ios-bg-elevated;
+  border-radius: @ios-radius-md;
+}
+
+// ---------- Séparateurs redimensionnables ----------
+.flexbox-handle-horizontal div,
+.flexbox-handle-vertical div {
+  background: @ios-separator-soft !important;
+  border: none !important;
+}
+
+// ---------- Cases à cocher / interrupteurs ----------
+input[type="checkbox"] {
+  accent-color: @ios-green;
+}
+.switch {
+  border-radius: 999px;
+  &.active { background: @ios-green !important; }
+}
+
+// ---------- Correctifs : flèches de la barre latérale ----------
+// Chevron fin façon iOS, visible au survol ou quand le dossier est déplié
+.outline-view .disclosure-triangle {
+  padding: 0 !important;
+  width: 18px !important;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 120ms ease;
+
+  div {
+    width: 6px;
+    height: 6px;
+    border: none !important;
+    border-right: 1.5px solid @ios-label-2 !important;
+    border-bottom: 1.5px solid @ios-label-2 !important;
+    transform: rotate(45deg) !important;   // déplié : vers le bas
+    margin-top: -3px;
+  }
+  &.collapsed div {
+    transform: rotate(-45deg) !important;  // replié : vers la droite
+    margin-top: 0;
+    margin-left: -3px;
+  }
+}
+.outline-view .item-container:hover .disclosure-triangle.visible,
+.outline-view .disclosure-triangle.visible:not(.collapsed) {
+  opacity: 1;
+}
+
+// ---------- Correctifs : zone « Écrire une réponse » ----------
+.footer-reply-area-wrap {
+  margin: 8px auto 20px auto !important;
+  border: none !important;
+  border-top: none !important;
+  border-radius: @ios-radius-lg !important;
+  background: @ios-bg-elevated !important;
+  box-shadow: @ios-card-shadow !important;
+  color: @ios-label-2 !important;
+  transition: background 120ms ease;
+
+  img.content-mask { background-color: @ios-accent !important; }
+
+  .footer-reply-area { padding: 14px 20px !important; }
+
+  &:hover { background: @ios-bg-tertiary !important; }
+}
+
+// =====================================================================
+// v1.1 — Barre latérale, liste, composer, bouton Envoyer
+// =====================================================================
+
+// ---------- Barre latérale : pastilles plus aérées ----------
+.account-sidebar .outline-view {
+  .heading { margin-bottom: 4px; }
+  .item {
+    height: 32px !important;
+    padding-left: 10px !important;
+    padding-right: 12px !important;
+    margin: 1px 8px 1px 0 !important;
+    border-radius: @ios-radius-sm !important;
+    .icon { padding-right: 10px !important; }
+  }
+}
+// Adresse email du compte en plus petit (on garde « Tous les comptes » en grand)
+.account-sidebar .outline-view:not(:first-child) .heading {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: @ios-label-2 !important;
+  letter-spacing: 0 !important;
+  padding-top: 18px !important;
+}
+
+// ---------- Liste des conversations ----------
+.thread-list,
+.draft-list {
+  .list-tabular-item {
+    border-bottom: none !important;
+
+    &::after {
+      display: none !important;
+    }
+
+    &:hover,
+    &.selected,
+    &.focused,
+    &.keyboard-cursor {
+      clip-path: inset(3px 8px round @ios-radius-md);
+    }
+  }
+
+  .participants {
+    font-size: 14px !important;
+    font-weight: 500;
+    color: @ios-label;
+    letter-spacing: -0.01em;
+  }
+  .message-count {
+    color: @ios-label-2 !important;
+    font-weight: 400 !important;
+    opacity: 1 !important;
+  }
+  .subject {
+    font-size: 13.5px !important;
+    color: @ios-label;
+  }
+  .snippet {
+    font-size: 13px !important;
+    color: @ios-label-2 !important;
+    opacity: 1 !important;
+  }
+  .timestamp {
+    font-size: 12px !important;
+    color: @ios-label-2 !important;
+    opacity: 1 !important;
+    font-variant-numeric: tabular-nums;
+  }
+
+  // Non lus : expéditeur et objet plus marqués
+  .unread:not(.focused) {
+    .participants, .participants .unread-true { font-weight: 700 !important; }
+    .subject { font-weight: 600 !important; }
+  }
+
+  // Pastille bleue « non lu » à la place de l'icône d'origine
+  .thread-icon-unread {
+    background-image: none !important;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: @ios-accent;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .focused .thread-icon-unread::after,
+  &.handler-split .selected .thread-icon-unread::after { background: #fff; }
+
+  // Étiquettes en pastilles compactes
+  .mail-label {
+    font-size: 11px !important;
+    line-height: 18px !important;
+    padding: 0 8px !important;
+    font-weight: 600;
+  }
+
+  // Ligne sélectionnée : texte secondaire lisible sur le bleu
+  .focused,
+  &.handler-split .selected {
+    .snippet, .timestamp, .message-count { color: rgba(255, 255, 255, 0.78) !important; }
+  }
+}
+
+// ---------- Composer : en-tête façon iOS ----------
+// Le champ « À » était enveloppé par le style « verre » des menus : on l'annule
+.tokenizing-field .menu,
+.composer-participant-field .menu,
+.search-bar .menu {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+// Les champs du composer ne doivent pas ressembler à des cases de formulaire
+.composer-inner-wrap,
+.composer-participant-field,
+.composer-subject {
+  input,
+  textarea,
+  input:focus,
+  textarea:focus {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+}
+.composer-participant-field,
+.composer-subject {
+  font-size: 14px;
+}
+.composer-inner-wrap .composer-field-label {
+  color: @ios-label-2 !important;
+  font-size: 14px;
+}
+.composer-inner-wrap .composer-header-actions .action {
+  color: @ios-label-2 !important;
+  font-size: 12.5px !important;
+  font-weight: 500;
+  &:hover { color: @ios-accent !important; }
+}
+
+// Destinataires : pastilles teintées de l'accent
+.tokenizing-field .token {
+  border-radius: 999px !important;
+  background: fade(@ios-accent, 16%) !important;
+  color: @ios-accent !important;
+  box-shadow: none !important;
+  border: none !important;
+  font-weight: 500;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  &:hover { background: fade(@ios-accent, 24%) !important; }
+  &.selected,
+  &.dragging {
+    background: @ios-accent !important;
+    color: #fff !important;
+    img.content-mask { background-color: #fff !important; }
+  }
+  &.invalid {
+    background: fade(@ios-red, 16%) !important;
+    color: @ios-red !important;
+  }
+}
+
+// Suggestions de contacts pendant la saisie
+.tokenizing-field .content-container:not(.empty) {
+  .ios-glass();
+  border-radius: @ios-radius-md !important;
+  padding: 6px 0;
+  min-width: 300px;
+  max-height: 320px;
+  overflow-y: auto;
+
+  .item {
+    border-radius: 10px;
+    margin: 1px 6px;
+    padding: 6px 12px !important;
+    .participant-primary { color: @ios-label; font-weight: 600; }
+    .participant-secondary { color: @ios-label-2; margin-left: 6px; }
+
+    &.selected {
+      background: @ios-accent !important;
+      .participant-primary, .participant-secondary { color: #fff !important; }
+    }
+  }
+}
+// Les cartes de message ne coupent plus le menu de suggestions
+.message-item-wrap .message-item-white-wrap { overflow: visible !important; }
+
+// ---------- Barre d'actions du composer ----------
+.composer-action-bar-wrap {
+  background: transparent !important;
+  border-top: 1px solid @ios-separator-soft !important;
+  box-shadow: none !important;
+}
+
+// ---------- Bouton Envoyer ----------
+.composer-action-bar-wrap .btn-send,
+.button-dropdown.btn-emphasis {
+  border-radius: 999px;
+  box-shadow: 0 4px 14px fade(@ios-accent, 35%);
+
+  .primary-item,
+  .secondary-picker,
+  .only-item {
+    display: inline-flex !important;
+    align-items: center;
+    height: 32px !important;
+    line-height: 32px !important;
+    background: @ios-accent !important;
+    background-image: none !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-weight: 600;
+    font-size: 13.5px;
+    img.content-mask { background-color: #fff !important; }
+    &:hover { background: lighten(@ios-accent, 5%) !important; }
+    &:active { background: darken(@ios-accent, 5%) !important; }
+  }
+  .primary-item {
+    border-radius: 999px 0 0 999px !important;
+    padding: 0 12px 0 16px !important;
+    gap: 7px;
+  }
+  .secondary-picker {
+    border-radius: 0 999px 999px 0 !important;
+    padding: 0 12px 0 9px !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.28) !important;
+  }
+  .only-item {
+    border-radius: 999px !important;
+    padding: 0 18px !important;
+    gap: 7px;
+  }
+  &.open .primary-item,
+  &.open .secondary-picker {
+    border-radius: inherit;
+  }
+  &.open.open-up .secondary-picker { border-top-right-radius: 999px !important; }
+  &.open.open-down .secondary-picker { border-bottom-right-radius: 999px !important; }
+
+  // Pas d'anneau de focus rectangulaire autour de la flèche
+  .primary-item,
+  .secondary-picker {
+    &:focus,
+    &:focus-visible { outline: none !important; }
+  }
+
+  .secondary-items {
+    .ios-glass();
+    border-radius: @ios-radius-md !important;
+    color: @ios-label;
+    font-size: 13.5px;  // le bouton est en font-size 0, le menu doit le rétablir
+    min-width: 220px;
+    padding: 5px 0;
+    z-index: 1000;
+
+    // Un seul calque de verre : le menu intérieur est transparent
+    .menu {
+      background: transparent !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      overflow: visible !important;
+    }
+    .menu .content-container {
+      background: transparent !important;
+      max-height: none;
+      overflow: visible;
+    }
+    .menu .item {
+      display: flex !important;
+      align-items: center;
+      width: auto;
+      margin: 1px 5px !important;
+      padding: 7px 12px !important;
+      border-radius: 9px !important;
+      font-size: 13.5px !important;
+      line-height: 18px;
+      color: @ios-label !important;
+
+      > span { display: inline-flex; align-items: center; gap: 6px; }
+      img.content-mask { background-color: @ios-label !important; margin: 0 !important; }
+
+      &:hover,
+      &.selected {
+        background: @ios-accent !important;
+        color: #fff !important;
+        img.content-mask { background-color: #fff !important; }
+      }
+    }
+
+    // Aucune autre action d'envoi : pas de cadre vide
+    &:has(.content-container.empty) { display: none !important; }
+  }
+
+  // Le menu s'ouvre juste au-dessus (ou en dessous) du bouton, sans le recouvrir
+  &.open.open-up .secondary-items,
+  &.open.open-down .secondary-items {
+    transform: none !important;
+    box-shadow: @ios-glass-shadow, inset 0 1px 0 @ios-glass-highlight !important;
+  }
+  &.open.open-up .secondary-items {
+    top: auto !important;
+    bottom: calc(100% + 8px) !important;
+  }
+  &.open.open-down .secondary-items {
+    top: calc(100% + 8px) !important;
+    bottom: auto !important;
+  }
+}
+
+// =====================================================================
+// v1.2 — Liste (états de fond), composer complet, autocomplétion
+// =====================================================================
+
+// ---------- Liste : fonds unifiés et états bien distincts ----------
+.thread-list .list-container,
+.thread-list .list-container .list-rows,
+.thread-list .scroll-region,
+.thread-list .scroll-region-content {
+  background: @ios-bg-elevated !important;   // plus de bande de couleur sous les lignes
+}
+
+.thread-list .list-container .list-item {
+  background: @ios-bg-elevated !important;
+  transition: background 90ms ease;
+
+  &:hover {
+    background: @ios-row-hover !important;
+    clip-path: inset(3px 8px round @ios-radius-md);
+  }
+  &.selected {
+    background: @ios-selected-bg !important;
+    clip-path: inset(3px 8px round @ios-radius-md);
+  }
+  &.focused,
+  &.keyboard-cursor.selected {
+    background: @ios-accent !important;
+    clip-path: inset(3px 8px round @ios-radius-md);
+  }
+}
+// Mode « lecture à côté » : la conversation ouverte est en bleu plein
+.thread-list.handler-split .list-container .list-item.selected {
+  background: @ios-accent !important;
+  color: #fff !important;
+  .participants, .subject, .participants .unread-true { color: #fff !important; }
+  .snippet, .timestamp, .message-count { color: rgba(255, 255, 255, 0.78) !important; }
+  img.content-mask { background-color: #fff !important; }
+}
+// Fenêtre en arrière-plan : sélection grise, comme sur macOS / iOS
+body.is-blurred .thread-list .list-container .list-item.selected,
+body.is-blurred .thread-list .list-container .list-item.focused,
+body.is-blurred .thread-list.handler-split .list-container .list-item.selected {
+  background: @ios-fill-strong !important;
+  color: @ios-label !important;
+  .participants, .subject, .participants .unread-true { color: @ios-label !important; }
+  .snippet, .timestamp, .message-count { color: @ios-label-2 !important; }
+  img.content-mask { background-color: @ios-label-2 !important; }
+  .thread-icon-unread::after { background: @ios-accent !important; }
+}
+// Dégradé des actions au survol, aligné sur les nouveaux fonds
+.thread-list .list-item:hover .list-column-HoverActions .inner {
+  background-image: linear-gradient(to right, fade(@ios-bg-elevated, 0%) 0%, @ios-bg-elevated 40%) !important;
+}
+
+// ---------- Composer : fenêtre pleine ----------
+.composer-full-window {
+  background: @ios-bg-elevated !important;
+
+  .composer-outer-wrap,
+  .composer-inner-wrap {
+    background: @ios-bg-elevated !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  .composer-inner-wrap .composer-action-bar-wrap {
+    background: @ios-bg-elevated !important;
+    border-top: 1px solid @ios-separator-soft !important;
+    box-shadow: none !important;
+  }
+  .composer-inner-wrap .composer-action-bar-content {
+    padding: 12px 20px !important;
+    align-items: center;
+  }
+}
+
+// ---------- Composer : champs ----------
+.composer-participant-field,
+.composer-subject {
+  min-height: 48px;
+  &::after { border-color: @ios-separator-soft !important; }
+}
+.composer-inner-wrap .composer-field-label {
+  font-size: 14px !important;
+  font-weight: 500;
+  padding-top: 15px !important;
+}
+.composer-subject input {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+  &::placeholder { color: @ios-label-3; font-weight: 500; }
+}
+.composer-header-actions .action {
+  border-radius: 999px;
+  padding: 5px 9px !important;
+  &:hover { background: @ios-fill; }
+}
+
+// Sélecteur « De : » en capsule
+.composer-participant-field .button-dropdown {
+  .primary-item,
+  .only-item,
+  .secondary-picker {
+    background: @ios-fill !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: @ios-label !important;
+    height: 28px !important;
+    line-height: 28px !important;
+    font-size: 13px;
+    img.content-mask { background-color: @ios-label-2 !important; }
+    &:hover { background: @ios-fill-strong !important; }
+  }
+  .only-item { border-radius: 999px !important; padding: 0 14px !important; }
+  .primary-item { border-radius: 999px 0 0 999px !important; padding: 0 8px 0 14px !important; }
+  .secondary-picker { border-radius: 0 999px 999px 0 !important; padding: 0 10px 0 6px !important; }
+  &:hover .primary-item,
+  &:hover .only-item { border-radius: inherit; }
+  .secondary-items {
+    .ios-glass();
+    border-radius: @ios-radius-md !important;
+    padding: 4px 0;
+  }
+}
+
+// ---------- Barre de mise en forme : capsule flottante ----------
+.RichEditor-toolbar {
+  font-family: @font-family-sans-serif !important;
+
+  .floating-container {
+    border-bottom: none !important;
+    padding: 8px 14px;
+  }
+  .inner {
+    background: @ios-toolbar-bg !important;
+    border: 1px solid @ios-separator-soft;
+    border-radius: 14px;
+    padding: 4px 6px;
+    gap: 2px;
+    width: auto !important;
+  }
+  button {
+    font-family: @font-family-sans-serif !important;
+    color: @ios-label-2 !important;
+    border-radius: 8px !important;
+    min-height: 28px;
+    max-width: 34px;
+    transition: background 90ms ease, color 90ms ease;
+    &:hover { background: @ios-fill !important; color: @ios-label !important; }
+    &.with-select { max-width: 120px; }
+    select {
+      font-family: @font-family-sans-serif !important;
+      color: @ios-label-2 !important;
+      font-size: 13px;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+  }
+  button.active {
+    color: @ios-accent !important;
+    background: fade(@ios-accent, 16%) !important;
+  }
+  .divider {
+    height: 16px !important;
+    border-right-color: @ios-separator !important;
+    margin: 0 6px !important;
+  }
+  .color-picker > button {
+    width: 16px !important;
+    height: 16px !important;
+    min-height: 16px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 0 1.5px @ios-label-3;
+    padding: 0 !important;
+  }
+  .dropdown {
+    .ios-glass();
+    border-radius: @ios-radius-md !important;
+  }
+}
+
+// Corps du message
+.composer-inner-wrap .RichEditor-content {
+  font-size: 15px;
+  line-height: 1.55;
+  color: @ios-label;
+}
+
+// ---------- Barre d'actions : icônes rondes ----------
+.composer-action-bar-wrap .btn.btn-toolbar:not(.btn-emphasis) {
+  border-radius: 999px !important;
+  height: 32px;
+  padding: 0 9px !important;
+  img.content-mask { background-color: @ios-label-2 !important; }
+  &:hover {
+    background: @ios-fill !important;
+    img.content-mask { background-color: @ios-label !important; }
+  }
+  &.btn-trash:hover img.content-mask { background-color: @ios-red !important; }
+  &.btn-enabled img.content-mask { background-color: @ios-accent !important; }
+}
+
+// Bouton Envoyer : un seul bloc, sans espace entre les deux parties
+.composer-action-bar-wrap .btn-send,
+.button-dropdown.btn-emphasis {
+  display: inline-flex !important;
+  align-items: stretch;
+  vertical-align: middle;
+  font-size: 0;  // supprime l'espace blanc entre les deux moitiés
+  .primary-item, .secondary-picker, .only-item { font-size: 13.5px; }
+}
+
+// ---------- Autocomplétion des destinataires ----------
+// Rien autour du champ ne doit couper la liste de suggestions
+.composer-header,
+.composer-header .key-commands-region,
+.composer-participant-field,
+.composer-participant-field .tokenizing-field,
+.composer-participant-field .tokenizing-field-wrap {
+  overflow: visible !important;
+}
+.tokenizing-field .content-container:not(.empty) {
+  z-index: 100 !important;
+  margin-top: 4px;
+
+  .item {
+    display: flex;
+    align-items: center;
+    min-height: 34px;
+    line-height: 1.3 !important;
+  }
+  .participant {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  .participant-primary { font-size: 13.5px; }
+  .participant-secondary { font-size: 12px; margin-left: 0 !important; }
+}
+
+// =====================================================================
+// v1.2.1 — Coins carrés du composer et des barres d'outils
+// =====================================================================
+
+// Mailspring arrondit la barre d'actions : son trait du haut se courbait aux extrémités
+.composer-action-bar-wrap {
+  border-radius: 0 0 @ios-radius-lg @ios-radius-lg !important;
+}
+
+// Fenêtre de rédaction séparée : aucun arrondi, ni en haut ni en bas
+.composer-full-window {
+  &,
+  .composer-outer-wrap,
+  .composer-inner-wrap,
+  .composer-header,
+  .composer-content-wrap,
+  .composer-action-bar-wrap {
+    border-radius: 0 !important;
+  }
+}
+.sheet-toolbar,
+.sheet-toolbar-container {
+  border-radius: 0 !important;
+}
+
+// =====================================================================
+// v1.3 — Nuances des trois panneaux et séparateurs
+// =====================================================================
+
+// ---------- Barre latérale : un ton plus clair ----------
+.account-sidebar,
+.column-RootSidebar,
+.outline-view {
+  background: @ios-panel-sidebar !important;
+}
+
+// ---------- Liste des conversations ----------
+.column-ThreadList,
+.thread-list,
+.list-container,
+.list-tabular {
+  background: @ios-panel !important;
+}
+.column-ThreadList {
+  border-radius: 0;  // panneaux à plat, sans coin arrondi contre la barre latérale
+  border-right: 1px solid @ios-panel-separator !important;
+}
+.thread-list .list-container,
+.thread-list .list-container .list-rows,
+.thread-list .scroll-region,
+.thread-list .scroll-region-content,
+.thread-list .list-container .list-item {
+  background: @ios-panel !important;
+}
+.thread-list .list-item:hover .list-column-HoverActions .inner {
+  background-image: linear-gradient(to right, fade(@ios-panel, 0%) 0%, @ios-panel 40%) !important;
+}
+
+// ---------- Lecture ----------
+.column-MessageList,
+.message-list,
+#message-list {
+  background: @ios-panel !important;
+}
+// Les cartes de message restent lisibles sur le nouveau fond
+.message-item-wrap {
+  .message-item-white-wrap { background: @ios-card !important; }
+  &.collapsed .message-item-white-wrap { background: @ios-card-soft !important; }
+}
+.footer-reply-area-wrap {
+  background: @ios-card !important;
+  &:hover { background: @ios-bg-tertiary !important; }
+}
+
+// ---------- Séparateurs ----------
+// Les poignées de redimensionnement ne dessinent plus de trait :
+// seul le séparateur liste | lecture reste visible (bordure ci-dessus)
+.flexbox-handle-horizontal div {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+// =====================================================================
+// v1.3.1 — Plus de contour bleu dans l'éditeur de mail
+// =====================================================================
+// Le focus global (anneau bleu de 3px) s'appliquait au champ de rédaction
+.RichEditor-root,
+.RichEditor-content,
+.composer-editor-plaintext,
+.composer-inner-wrap,
+.composer-outer-wrap,
+.composer-body-wrap,
+.compose-body,
+.compose-body-scroll,
+[contenteditable],
+[contenteditable]:focus,
+[contenteditable]:focus-visible,
+.RichEditor-root *:focus,
+.RichEditor-root *:focus-visible,
+.composer-editor-plaintext textarea:focus,
+.composer-editor-plaintext textarea:focus-visible {
+  outline: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+.message-item-white-wrap.composer-outer-wrap.focused {
+  box-shadow: @ios-card-shadow !important;
+}
+
+// =====================================================================
+// v1.4.4 — Étiquettes plus lisibles et moins vives
+// =====================================================================
+// Mailspring colore chaque étiquette en style inline : fond pastel clair,
+// texte foncé, dégradé blanc. On garde la teinte (via currentColor, qui
+// reste la couleur inline) mais on passe en fond sombre et texte clair.
+// -webkit-text-fill-color peint le texte sans modifier currentColor.
+.mail-label {
+  background-color: @ios-tag-bg !important;
+  background-image: none !important;
+  -webkit-text-fill-color: @ios-tag-text;
+  .x { background-color: @ios-tag-text !important; }
+}
