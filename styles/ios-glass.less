@@ -737,7 +737,10 @@ input[type="checkbox"] {
 
 .thread-list .list-container .list-item {
   background: @ios-bg-elevated !important;
-  transition: background 90ms ease;
+  // clip-path toujours défini et animé : sinon il disparaît d'un coup à la
+  // désélection et le carré plein flashe en bleu pendant le fondu du fond
+  clip-path: inset(0 0 round 0);
+  transition: background 90ms ease, clip-path 90ms ease;
 
   &:hover {
     background: @ios-row-hover !important;

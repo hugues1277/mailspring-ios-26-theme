@@ -2,7 +2,7 @@
   "name": "ui-ios-glass-dark",
   "displayName": "iOS Glass Dark",
   "theme": "ui",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "description": "Thème sombre inspiré d'iOS 26 (Liquid Glass) pour Mailspring",
   "license": "MIT",
   "engines": {
