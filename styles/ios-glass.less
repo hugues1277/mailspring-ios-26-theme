@@ -1087,3 +1087,38 @@ body.is-blurred .thread-list.handler-split .list-container .list-item.selected {
   -webkit-text-fill-color: @ios-tag-text;
   .x { background-color: @ios-tag-text !important; }
 }
+
+// =====================================================================
+// v1.4.5 — Barre du haut de la même couleur que la barre latérale
+// =====================================================================
+.sheet-toolbar,
+.sheet-toolbar-container {
+  background: @ios-panel-sidebar !important;
+  background-image: none !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+// =====================================================================
+// v1.4.6 — « Écrire une réponse » : sans fond, ombre, contour ni arrondi
+// =====================================================================
+.footer-reply-area-wrap,
+.footer-reply-area-wrap:hover {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+// =====================================================================
+// v1.4.7 — 16px d'espace au-dessus de la liste de mails
+// =====================================================================
+// Les lignes sont en position absolue : le padding va sur le conteneur
+// (border-box pour que la zone de défilement ne déborde pas)
+.thread-list .list-container {
+  box-sizing: border-box !important;
+  padding-top: 6px !important;
+}
